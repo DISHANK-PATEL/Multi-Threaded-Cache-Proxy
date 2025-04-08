@@ -21,6 +21,9 @@ The proxy server functions as an intermediary between client requests and remote
 - Locking and synchronization to ensure safe concurrency.
 - Caching techniques and their potential use in browsers.
 
+## Sequence Diagram
+![image](https://github.com/user-attachments/assets/eda2896d-9e41-4747-829d-3a452f530e8f)
+
 ## UML Diagram
 ![image](https://github.com/user-attachments/assets/68e7bf6d-899a-4931-b24e-72ad16ebcc06)
 
