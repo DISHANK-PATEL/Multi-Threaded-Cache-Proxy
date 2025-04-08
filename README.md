@@ -9,7 +9,6 @@ This project implements a Multi-Threaded Proxy Server in **C** and **C++** with 
 - [Project Theory](#project-theory)
 - [How to Run](#how-to-run)
 - [Demo](#demo)
-- [Contributing](#contributing)
 
 ---
 
@@ -21,6 +20,9 @@ The proxy server functions as an intermediary between client requests and remote
 - Handling multiple client requests concurrently.
 - Locking and synchronization to ensure safe concurrency.
 - Caching techniques and their potential use in browsers.
+
+## UML Diagram
+![image](https://github.com/user-attachments/assets/68e7bf6d-899a-4931-b24e-72ad16ebcc06)
 
 ### Basic Working Flow of the Proxy Server
 1. **Client Request**: Clients send HTTP requests to the proxy server.
@@ -60,7 +62,29 @@ The proxy server functions as an intermediary between client requests and remote
 - **Cache Duplication**: If a URL opens multiple client connections simultaneously, the cache may store separate responses for each client. This could result in incomplete responses when retrieving from the cache.
 - **Fixed Cache Element Size**: Large websites may not be fully stored in the cache due to a fixed maximum element size.
 
-=
+---
+
+## Demo
+
+1. ![e6db0677-1c92-475d-9a70-6f5e00d3296e](https://github.com/user-attachments/assets/cfb4b61a-24e1-4f8e-bee5-661c4cdf5e7b)
+2. ![6d009b5b-6bed-4073-bee9-38d271b03786](https://github.com/user-attachments/assets/49d5c793-0da8-4f31-8b12-16cd44285a2c)
+
+### Explanation
+
+1. **First-Time Requests (Cache Miss)**: When you open a website for the first time (e.g., www.google.com or www.princeton.edu), the proxy does not have the response data cached yet. Consequently, the proxy must forward your request to the remote server (“remote server is reached”). This is referred to as a cache miss.
+
+2. **Caching the Response**: As the proxy receives the response from the remote server, it stores the data (often including headers) in its local cache. The exact caching algorithm here uses either LRU (Least Recently Used) or LFU (Least Frequently Used)—or some combination—to determine which elements should remain in cache when the cache is at capacity.
+
+3. **Subsequent Requests (Cache Hit)**: When you request the same URL again, the proxy checks its cache. If the content is present and valid, it sends it directly to you from its cache instead of reaching out to the remote server again. This results in faster load times and lower bandwidth usage, which is referred to as a cache hit.
+
+4. **Cache Eviction (LRU / LFU Policy)**:
+    - **LRU**: The cache discards the item that was accessed the longest time ago.
+    - **LFU**: The cache discards the item that has been used the least number of times.
+
+5. **Terminal Output**:
+    - `Received Request From / To` lines indicate when a client request is received by the proxy and forwarded to a server.
+    - `Cache Miss` lines confirm that the requested URL wasn’t found in the proxy’s cache and must be fetched from the remote server.
+    - `Request Processing Completed` or similar messages indicate that the proxy successfully sent the final response back to the client.
 
 ---
 
@@ -68,6 +92,12 @@ The proxy server functions as an intermediary between client requests and remote
 
 Follow these steps to build and run the proxy server:
 
-1. **Clone the Repository**
-   ```bash
-   git clone
+$ git clone https://github.com/DISHANK-PATEL/Multi-Threaded-Cache-Proxy.git
+
+$ cd MultiThreadedProxyServerClient
+
+$ make all
+$ ./proxy <port no.>
+
+---
+
